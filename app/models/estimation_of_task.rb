@@ -1,0 +1,2 @@
+class EstimationOfTask < ApplicationRecord
+end

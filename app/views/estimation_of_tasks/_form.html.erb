@@ -1,0 +1,32 @@
+<%= form_with(model: estimation_of_task, local: true) do |form| %>
+  <% if estimation_of_task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(estimation_of_task.errors.count, "error") %> prohibited this estimation_of_task from being saved:</h2>
+
+      <ul>
+        <% estimation_of_task.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :detail %>
+    <%= form.text_field :detail %>
+  </div>
+
+  <div class="field">
+    <%= form.label :task_type %>
+    <%= form.number_field :task_type %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
