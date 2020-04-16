@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Title:
+  = @estimation_of_task.title
+%p
+  %strong Detail:
+  = @estimation_of_task.detail
+%p
+  %strong Task type:
+  = @estimation_of_task.task_type
+= link_to 'Edit', edit_estimation_of_task_path(@estimation_of_task)
+|
+= link_to 'Back', estimation_of_tasks_path

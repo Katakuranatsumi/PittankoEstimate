@@ -1,0 +1,20 @@
+%p#notice= notice
+%h1 Estimation Of Tasks
+%table
+  %thead
+    %tr
+      %th Title
+      %th Detail
+      %th Task type
+      %th{:colspan => "3"}
+  %tbody
+    - @estimation_of_tasks.each do |estimation_of_task|
+      %tr
+        %td= estimation_of_task.title
+        %td= estimation_of_task.detail
+        %td= estimation_of_task.task_type
+        %td= link_to 'Show', estimation_of_task
+        %td= link_to 'Edit', edit_estimation_of_task_path(estimation_of_task)
+        %td= link_to 'Destroy', estimation_of_task, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Estimation Of Task', new_estimation_of_task_path
