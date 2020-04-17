@@ -1,11 +1,11 @@
 %p#notice= notice
-%h1 Estimation Of Tasks
+%h1 タスク見積一覧
 %table
   %thead
     %tr
-      %th Title
-      %th Detail
-      %th Task type
+      %th= EstimationOfTask.human_attribute_name(:title)
+      %th= EstimationOfTask.human_attribute_name(:detail)
+      %th= EstimationOfTask.human_attribute_name(:task_type)
       %th{:colspan => "3"}
   %tbody
     - @estimation_of_tasks.each do |estimation_of_task|
@@ -17,4 +17,4 @@
         %td= link_to 'Edit', edit_estimation_of_task_path(estimation_of_task)
         %td= link_to 'Destroy', estimation_of_task, method: :delete, data: { confirm: 'Are you sure?' }
 %br/
-= link_to 'New Estimation Of Task', new_estimation_of_task_path
+= link_to '新規タスク見積作成', new_estimation_of_task_path

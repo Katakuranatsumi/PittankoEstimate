@@ -1,0 +1,10 @@
+ja:
+  activerecord:
+    models:
+      estimation_of_task: タスク見積り
+    attributes:
+      estimation_of_task:
+        title: タイトル
+        detail: 詳細
+        task_type: タスク種類
+      
