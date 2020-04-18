@@ -28,7 +28,7 @@ class EstimationOfTasksController < ApplicationController
 
     respond_to do |format|
       if @estimation_of_task.save
-        format.html { redirect_to @estimation_of_task, notice: 'Estimation of task was successfully created.' }
+        format.html { redirect_to @estimation_of_task, notice: "タスク見積りID:#{@estimation_of_task.id}「#{@estimation_of_task.title}」を登録しました。" }
         format.json { render :show, status: :created, location: @estimation_of_task }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class EstimationOfTasksController < ApplicationController
   def update
     respond_to do |format|
       if @estimation_of_task.update(estimation_of_task_params)
-        format.html { redirect_to @estimation_of_task, notice: 'Estimation of task was successfully updated.' }
+        format.html { redirect_to @estimation_of_task, notice: "タスク見積りID:#{@estimation_of_task.id}「#{@estimation_of_task.title}」を更新しました。" }
         format.json { render :show, status: :ok, location: @estimation_of_task }
       else
         format.html { render :edit }
