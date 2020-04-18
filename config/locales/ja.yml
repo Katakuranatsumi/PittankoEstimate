@@ -7,4 +7,9 @@ ja:
         title: タイトル
         detail: 詳細
         task_type: タスク種類
-      
+  enums:
+    estimation_of_task:
+      task_type:
+        development: 開発
+        requirement_definition: 要件定義
+        test: テスト
