@@ -12,7 +12,7 @@
       %tr
         %td= estimation_of_task.title
         %td= estimation_of_task.detail
-        %td= estimation_of_task.task_type
+        %td= estimation_of_task.task_type_i18n
         %td= link_to '詳細', estimation_of_task
         %td= link_to '編集', edit_estimation_of_task_path(estimation_of_task)
         %td= link_to '削除', estimation_of_task, method: :delete, data: { confirm: "タスク見積りID:#{estimation_of_task.id}「#{estimation_of_task.title}」を削除してもよろしいですか？" }
