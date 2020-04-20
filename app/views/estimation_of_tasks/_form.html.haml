@@ -15,6 +15,6 @@
     = form.text_field :detail
   .field
     = form.label :task_type
-    = form.number_field :task_type
+    = form.select :task_type, candidated_task_types
   .actions
     = form.submit
