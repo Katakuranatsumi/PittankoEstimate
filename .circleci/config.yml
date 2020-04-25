@@ -10,14 +10,14 @@ jobs:
           RAILS_ENV: test
       - image: circleci/postgres:12.2
         environment:
-          POSTGRES_DB: estimation_of_tasks_test
+          POSTGRES_DB: pittanko_estimate_test
 
     working_directory: ~/repo
 
     steps:
       - checkout
 
-       # Download and cache dependencies
+       # 依存関係をダウンロードしてキャッシュする
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
