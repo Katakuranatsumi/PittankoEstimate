@@ -6,10 +6,20 @@ jobs:
   build:
     docker:
       - image: circleci/ruby:2.6.4-stretch-node
-    executor: ruby/default
+        environment:
+          RAILS_ENV: test
+      - image: circleci/postgres:12.2
+        environment:
+          POSTGRES_DB: estimation_of_tasks_test
+
+    working_directory: ~/repo
+
     steps:
       - checkout
+
+      - run: gem install bundler -v 2.0.1
+
       - run:
-          name: Which bundler?
-          command: bundle -v
-      - ruby/bundle-install
+          name: install dependencies
+          command: |
+            bundle install --jobs=4 --retry=3 --path vender/bundle
