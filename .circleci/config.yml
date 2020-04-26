@@ -17,12 +17,12 @@ jobs:
     steps:
       - checkout
 
-       # 依存関係をダウンロードしてキャッシュする
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            # 完全に一致するものが見つからない場合、最新のキャッシュを使用するようにフォールバック
-            - v1-dependencies-
+      #  # 依存関係をダウンロードしてキャッシュする
+      # - restore_cache:
+      #     keys:
+      #       - v1-dependencies-{{ checksum "Gemfile.lock" }}
+      #       # 完全に一致するものが見つからない場合、最新のキャッシュを使用するようにフォールバック
+      #       - v1-dependencies-
 
       - run: gem install bundler -v 2.0.1
 
@@ -31,13 +31,12 @@ jobs:
           command: |
             bundle install --jobs=4 --retry=3 --path vender/bundle
           
-      - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      # - save_cache:
+      #     paths:
+      #       - ./vendor/bundle
+      #     key: v1-dependencies-{{ checksum "Gemfile.lock" }}
     
       # Databeseのセットアップ
-      - run: rm /tmp/pids
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
 
