@@ -50,15 +50,17 @@ jobs:
 
       - run: sudo apt update
 
-      - run:
-          name: 最新バージョンのChromeをインストール
-          command: |
-            sudo apt install libappindicator3-1
-            sudo apt install -f
-            curl -L -o google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-            sudo dpkg -i google-chrome.deb
-            sudo sed -i 's|HERE/chrome\"|HERE/chrome\" --disable-setuid-sandbox|g' /opt/google/chrome/google-chrome
-            rm google-chrome.deb
+      - run: sudo apt install libappindicator3-1
+      - run: curl -L -o google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      - run: sudo apt install fonts-liberation
+      - run: sudo apt install libasound2
+      - run: sudo apt install libnspr4
+      - run: sudo apt install libnss3
+      - run: sudo apt install libxss1
+      - run: sudo apt install xdg-utils
+      - run: sudo dpkg -i google-chrome.deb
+      - run: sudo sed -i 's|HERE/chrome\"|HERE/chrome\" --disable-setuid-sandbox|g' /opt/google/chrome/google-chrome
+      - run: rm google-chrome.deb
     
       # テストの実行
       - run:
@@ -69,7 +71,7 @@ jobs:
             circleci tests split --split-by=timings)"
 
             bundle exec rspec \
-              -- format progress \
+              --format progress \
               --format RspecJunitFormatter \
               --out /tmp/test-results/rspec.xml \
               --format progress \
