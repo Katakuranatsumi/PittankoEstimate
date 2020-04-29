@@ -12,7 +12,7 @@ jobs:
         environment:
           POSTGRES_DB: pittanko_estimate_test
 
-    working_directory: ~/repo
+    working_directory: ~/repository
 
     steps:
       - checkout
@@ -37,8 +37,8 @@ jobs:
       #     key: v1-dependencies-{{ checksum "Gemfile.lock" }}
     
       # Databeseのセットアップ
-      # - run: bundle exec rake db:create
-      # - run: bundle exec rake db:schema:load
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
 
       # - run:
       #     name: 最新バージョンのChromeをインストール
