@@ -8,66 +8,74 @@ jobs:
       - image: circleci/ruby:2.6.4-stretch-node
         environment:
           RAILS_ENV: test
+          PGHOST: 127.0.0.1
+          PGUSER: postgres
+
       - image: circleci/postgres:12.2
         environment:
+          POSTGRES_HOST_AUTH_METHOD: 'trust'
           POSTGRES_DB: pittanko_estimate_test
 
-    working_directory: ~/repository
+    working_directory: ~/repo
 
     steps:
       - checkout
 
       #  # 依存関係をダウンロードしてキャッシュする
-      # - restore_cache:
-      #     keys:
-      #       - v1-dependencies-{{ checksum "Gemfile.lock" }}
-      #       # 完全に一致するものが見つからない場合、最新のキャッシュを使用するようにフォールバック
-      #       - v1-dependencies-
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            # 完全に一致するものが見つからない場合、最新のキャッシュを使用するようにフォールバック
+            - v1-dependencies-
 
       - run: gem install bundler -v 2.0.1
 
       - run:
           name: install dependencies
           command: |
-            bundle install --jobs=4 --retry=3 --path vender/bundle
-          
-      # - save_cache:
-      #     paths:
-      #       - ./vendor/bundle
-      #     key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+            bundle install --jobs=4 --retry=3 --path vender/bundle    
+
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      
+      - run:
+          name: DB を待機
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
     
       # Databeseのセットアップ
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
 
-      # - run:
-      #     name: 最新バージョンのChromeをインストール
-      #     command: |
-      #       sudo apt install lobappindcator3-1
-      #       curl -L -o google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-      #       sudo dpkg -i goole-chrome.deb
-      #       sudo sed -i 's|HERE/chrome\"|HERE/chrome\" --disable-setuid-sandbox|g' /opt/google/chrome/google-chrome
-      #       rm google-chrome.deb
+      - run:
+          name: 最新バージョンのChromeをインストール
+          command: |
+            sudo apt install lobappindcator3-1
+            curl -L -o google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+            sudo dpkg -i goole-chrome.deb
+            sudo sed -i 's|HERE/chrome\"|HERE/chrome\" --disable-setuid-sandbox|g' /opt/google/chrome/google-chrome
+            rm google-chrome.deb
     
-      # テストの実行
-      # - run:
-      #     name: テストの実行
-      #     command: |
-      #       mkdir /tmp/test-results
-      #       TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
-      #       circleci tests split --split-by=timings)"
+      テストの実行
+      - run:
+          name: テストの実行
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
+            circleci tests split --split-by=timings)"
 
-      #       bundle exec rspec \
-      #         -- format progress \
-      #         --format RspecJunitFormatter \
-      #         --out /tmp/test-results/rspec.xml \
-      #         --format progress \
-      #         $TEST_FILES
+            bundle exec rspec \
+              -- format progress \
+              --format RspecJunitFormatter \
+              --out /tmp/test-results/rspec.xml \
+              --format progress \
+              $TEST_FILES
 
-      # テスト結果の徴収
-      # - store_test_results:
-      #     path: /tmp/test-results
-      # - store_artifacts:
-      #     path: /tmp/test-results
-      #     destination: test-results
+      テスト結果の徴収
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
 
