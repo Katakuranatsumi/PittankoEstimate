@@ -188,6 +188,8 @@ GEM
       rspec-mocks (~> 3.9.0)
       rspec-support (~> 3.9.0)
     rspec-support (3.9.2)
+    rspec_junit_formatter (0.4.1)
+      rspec-core (>= 2, < 4, != 2.12.0)
     ruby_dep (1.5.0)
     ruby_parser (3.14.2)
       sexp_processor (~> 4.9)
@@ -265,6 +267,7 @@ DEPENDENCIES
   rails-i18n (~> 6.0.0)
   rename
   rspec-rails (~> 3.7)
+  rspec_junit_formatter
   sass-rails (~> 5)
   selenium-webdriver
   spring
