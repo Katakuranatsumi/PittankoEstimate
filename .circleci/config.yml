@@ -57,7 +57,7 @@ jobs:
             sudo sed -i 's|HERE/chrome\"|HERE/chrome\" --disable-setuid-sandbox|g' /opt/google/chrome/google-chrome
             rm google-chrome.deb
     
-      テストの実行
+      # テストの実行
       - run:
           name: テストの実行
           command: |
@@ -72,7 +72,7 @@ jobs:
               --format progress \
               $TEST_FILES
 
-      テスト結果の徴収
+      # テスト結果の徴収
       - store_test_results:
           path: /tmp/test-results
       - store_artifacts:
