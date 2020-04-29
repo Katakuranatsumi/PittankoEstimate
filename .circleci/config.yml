@@ -48,6 +48,8 @@ jobs:
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
 
+      - run: sudo apt update
+
       - run:
           name: 最新バージョンのChromeをインストール
           command: |
