@@ -2,6 +2,6 @@ class GenerateTicketJob < ApplicationJob
   queue_as :default
 
   def perform(*args)
-    # Do something later
+    logger.debug("ActiveJobの確認")
   end
 end
