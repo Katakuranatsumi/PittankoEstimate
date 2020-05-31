@@ -222,6 +222,8 @@ GEM
       rack (~> 2.0)
       rack-protection (>= 2.0.0)
       redis (>= 4.1.0)
+    sidekiq-failures (1.0.0)
+      sidekiq (>= 4.0.0)
     slack-notifier (2.3.2)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
@@ -286,6 +288,7 @@ DEPENDENCIES
   sass-rails (~> 5)
   selenium-webdriver
   sidekiq
+  sidekiq-failures
   slack-notifier
   spring
   spring-watcher-listen (~> 2.0.0)
