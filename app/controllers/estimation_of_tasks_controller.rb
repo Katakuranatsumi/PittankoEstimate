@@ -5,7 +5,7 @@ class EstimationOfTasksController < ApplicationController
   # GET /estimation_of_tasks.json
   def index
     @estimation_of_tasks = EstimationOfTask.all
-    GenerateTicketJob.perform_later
+    #GenerateTicketJob.perform_later
   end
 
   # GET /estimation_of_tasks/1
