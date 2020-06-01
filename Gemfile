@@ -64,3 +64,4 @@ gem 'sidekiq'
 gem 'dotenv-rails'
 gem 'slack-notifier'
 gem 'sidekiq-failures'
+gem 'whenever', require: false
