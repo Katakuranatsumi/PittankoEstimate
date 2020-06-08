@@ -1,29 +1,21 @@
 class EstimationOfTasksController < ApplicationController
   before_action :set_estimation_of_task, only: [:show, :edit, :update, :destroy]
 
-  # GET /estimation_of_tasks
-  # GET /estimation_of_tasks.json
   def index
     @estimation_of_tasks = EstimationOfTask.all
     #GenerateTicketJob.perform_later
   end
 
-  # GET /estimation_of_tasks/1
-  # GET /estimation_of_tasks/1.json
   def show
   end
 
-  # GET /estimation_of_tasks/new
   def new
     @estimation_of_task = EstimationOfTask.new
   end
 
-  # GET /estimation_of_tasks/1/edit
   def edit
   end
 
-  # POST /estimation_of_tasks
-  # POST /estimation_of_tasks.json
   def create
     @estimation_of_task = EstimationOfTask.new(estimation_of_task_params)
 
@@ -38,8 +30,6 @@ class EstimationOfTasksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /estimation_of_tasks/1
-  # PATCH/PUT /estimation_of_tasks/1.json
   def update
     respond_to do |format|
       if @estimation_of_task.update(estimation_of_task_params)
@@ -52,8 +42,6 @@ class EstimationOfTasksController < ApplicationController
     end
   end
 
-  # DELETE /estimation_of_tasks/1
-  # DELETE /estimation_of_tasks/1.json
   def destroy
     @estimation_of_task.destroy
     respond_to do |format|
